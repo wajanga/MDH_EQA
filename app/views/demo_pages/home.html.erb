@@ -1,2 +1,143 @@
-<% provide(:title, current_user.username) %>
-<h1><%= current_user.username %></h1>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  <h1 class="page-header">EQA Results</h1>
+
+  <div class="row placeholders">
+    <div class="span6">
+      <%= pie_chart({"Successful (95-100)" => 75, "Satisfactory (90-95)" => 10, "Unsatisfactory (<90)" => 15}) %>
+      <h4 class="graph-label">Facility Performance</h4>
+    </div>
+    <div class="span6">
+      <%= column_chart({"Dodoma" => 20, "Arusha" => 40, "Kagera" => 30}) %>
+      <h4 class="graph-label">Results received by region</h4>
+    </div>
+  </div>
+
+  <h2>Facilities</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Facility</th>
+          <th>District</th>
+          <th>Region</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+              <td>1,001</td>
+              <td>Lorem</td>
+              <td>ipsum</td>
+              <td>dolor</td>
+              <td>95</td>
+        </tr>
+        <tr>
+                  <td>1,002</td>
+                  <td>amet</td>
+                  <td>consectetur</td>
+                  <td>adipiscing</td>
+                  <td>100</td>
+        </tr>
+        <tr>
+                  <td>1,003</td>
+                  <td>Integer</td>
+                  <td>nec</td>
+                  <td>odio</td>
+                  <td>100</td>
+        </tr>
+        <tr>
+                  <td>1,003</td>
+                  <td>libero</td>
+                  <td>Sed</td>
+                  <td>cursus</td>
+                  <td>90</td>
+        </tr>
+        <tr>
+                  <td>1,004</td>
+                  <td>dapibus</td>
+                  <td>diam</td>
+                  <td>Sed</td>
+                  <td>95</td>
+        </tr>
+        <tr>
+                  <td>1,005</td>
+                  <td>Nulla</td>
+                  <td>quis</td>
+                  <td>sem</td>
+                  <td>90</td>
+        </tr>
+        <tr>
+                  <td>1,006</td>
+                  <td>nibh</td>
+                  <td>elementum</td>
+                  <td>imperdiet</td>
+                  <td>100</td>
+        </tr>
+        <tr>
+                  <td>1,007</td>
+                  <td>sagittis</td>
+                  <td>ipsum</td>
+                  <td>Praesent</td>
+                  <td>85</td>
+        </tr>
+        <tr>
+                  <td>1,008</td>
+                  <td>Fusce</td>
+                  <td>nec</td>
+                  <td>tellus</td>
+                  <td>90</td>
+        </tr>
+        <tr>
+                  <td>1,009</td>
+                  <td>augue</td>
+                  <td>semper</td>
+                  <td>porta</td>
+                  <td>100</td>
+        </tr>
+        <tr>
+                  <td>1,010</td>
+                  <td>massa</td>
+                  <td>Vestibulum</td>
+                  <td>lacinia</td>
+                  <td>100</td>
+        </tr>
+        <tr>
+                  <td>1,011</td>
+                  <td>eget</td>
+                  <td>nulla</td>
+                  <td>Class</td>
+                  <td>80</td>
+        </tr>
+        <tr>
+                  <td>1,012</td>
+                  <td>taciti</td>
+                  <td>sociosqu</td>
+                  <td>ad</td>
+                  <td>85</td>
+        </tr>
+        <tr>
+                  <td>1,013</td>
+                  <td>torquent</td>
+                  <td>per</td>
+                  <td>conubia</td>
+                  <td>100</td>
+        </tr>
+        <tr>
+                  <td>1,014</td>
+                  <td>per</td>
+                  <td>inceptos</td>
+                  <td>himenaeos</td>
+                  <td>100</td>
+        </tr>
+        <tr>
+                  <td>1,015</td>
+                  <td>sodales</td>
+                  <td>ligula</td>
+                  <td>in</td>
+                  <td>95</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

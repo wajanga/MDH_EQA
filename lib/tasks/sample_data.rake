@@ -10,10 +10,10 @@ def make_users
                        email:    "awkondoro@vastech.co.tz",
                        password: "awkondoro",
                        password_confirmation: "awkondoro")
-  User.create!(username:     "sample",
-                 email:    "sample@vastech.co.tz",
-                 password: "sample",
-                 password_confirmation: "sample")
+  User.create!(username:     "sample123",
+                 email:    "sample123@vastech.co.tz",
+                 password: "sample123",
+                 password_confirmation: "sample123")
   ##
   #99.times do |n|
     #name  = Faker::Name.name
