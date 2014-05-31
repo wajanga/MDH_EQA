@@ -12,6 +12,8 @@ gem 'bootstrap-will_paginate', '0.0.9'
 # Bundles for charts
 gem 'highcharts-rails', '4.0.0'
 gem 'chartkick', '1.2.4'
+# Bundle for autocomplete
+gem 'rails4-autocomplete', '~> 1.0.7'
 
 group :development, :test do
 	# Use sqlite3 as the database for Active Record
@@ -43,7 +45,8 @@ gem 'coffee-rails', '4.0.1'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '3.0.4'
+# gem 'jquery-rails', '3.0.4'
+gem "jquery-rails", "~> 2.3.0"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '1.1.1'

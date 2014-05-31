@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527121026) do
+ActiveRecord::Schema.define(version: 20140530202742) do
 
   create_table "districts", force: true do |t|
     t.string   "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140527121026) do
     t.datetime "updated_at"
   end
 
+  add_index "districts", ["name"], name: "index_districts_on_name"
   add_index "districts", ["region_id"], name: "index_districts_on_region_id"
 
   create_table "eqa_tests", force: true do |t|

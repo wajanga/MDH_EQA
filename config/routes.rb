@@ -1,4 +1,9 @@
 MDHEqa::Application.routes.draw do
+  resources :facilities do
+    get :autocomplete_district_name, :on => :collection
+  end
+  resources :districts
+  resources :results
   resources :sessions, only: [:new, :create, :destroy]
   root  'sessions#new'
   match '/signin',  to: 'sessions#new',         via: 'get'

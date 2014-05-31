@@ -1,0 +1,12 @@
+<% provide(:title, 'Create Facility') %>
+<h1>Create new facility</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@facility) do |f| %>
+      <%= render 'facility_fields', f: f %>
+
+      <%= f.submit "Create Facility", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
