@@ -21,6 +21,7 @@ describe "ResultsApis" do
     	#expect(response.body).to include("123")
         expect(response.status).to eq 201 # created
         expect(Result.first.facility_id).to eq 1
+        expect(Result.count).to eq 1
         #expect(Result.first.facility).to eq "Mwananyamala Regional Hospital"
     end
   end
