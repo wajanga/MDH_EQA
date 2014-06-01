@@ -6,15 +6,16 @@ class Facility < ActiveRecord::Base
 	has_many :results, dependent: :destroy
 
 	validates :name,  presence: true
-  	validates :facility_type_id, presence: true
-  	validates :district_id, presence: true
+  validates :facility_type_id, presence: true
+  validates :district_id, presence: true
+  validates :facility_no,  presence: true
 
-  	def district_name
-  		district.try(:name)
-  	end
+  def district_name
+  	district.try(:name)
+  end
 
-  	def district_name=(name)
-  		self.district = District.find_by_name(name) if name.present?
-  	end
+  def district_name=(name)
+  	self.district = District.find_by_name(name) if name.present?
+  end
 
 end

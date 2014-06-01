@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530202742) do
+ActiveRecord::Schema.define(version: 20140601075527) do
 
   create_table "districts", force: true do |t|
     t.string   "name"
@@ -39,9 +39,11 @@ ActiveRecord::Schema.define(version: 20140530202742) do
     t.integer  "district_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "facility_no"
   end
 
   add_index "facilities", ["district_id"], name: "index_facilities_on_district_id"
+  add_index "facilities", ["facility_no"], name: "index_facilities_on_facility_no"
   add_index "facilities", ["facility_type_id"], name: "index_facilities_on_facility_type_id"
 
   create_table "facility_types", force: true do |t|
@@ -83,16 +85,18 @@ ActiveRecord::Schema.define(version: 20140530202742) do
     t.date     "result_received_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "score"
   end
 
   add_index "results", ["eqa_test_id"], name: "index_results_on_eqa_test_id"
   add_index "results", ["facility_id"], name: "index_results_on_facility_id"
+  add_index "results", ["score"], name: "index_results_on_score"
 
   create_table "sample_results", force: true do |t|
     t.string   "specimen_id"
-    t.integer  "d_result"
-    t.integer  "u_result"
-    t.integer  "f_result"
+    t.string   "d_result"
+    t.string   "u_result"
+    t.string   "f_result"
     t.integer  "result_id"
     t.datetime "created_at"
     t.datetime "updated_at"

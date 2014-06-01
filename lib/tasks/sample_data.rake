@@ -3,6 +3,8 @@ namespace :db do
   task populate: :environment do
     make_users
     make_facility
+    make_result
+    make_eqa
   end
 end
 
@@ -46,7 +48,19 @@ def make_facility
   region = Region.create!(name: "Dar-es-Salaam")
   district = region.districts.create!(name: "Kinondoni")
   facility_type = FacilityType.create!(name: "Lab")
-  Facility.create!(name: "Mwananyamala Regional Hospital", facility_type_id: facility_type.id, district_id: district.id)
+  Facility.create!(name: "Mwananyamala Regional Hospital", facility_type_id: facility_type.id, district_id: district.id,
+    facility_no: 123)
+end
+
+def make_result
+  Result.create!(facility_id: 1, eqa_test_id: 1, sample_receive_date: "2014-05-20", 
+    done_by: "Aron", assay1_no: "123", assay2_no: "123", 
+    approved_by: "Abdallah", test_done_date: "2014-05-20", assay1_expiry_date: "2014-05-20", 
+    assay2_expiry_date: "2014-05-20", result_received_date: "2014-05-20")
+end
+
+def make_eqa
+  EqaTest.create!(eqa_number: "1", start_date: "2014-01-01", end_date: "2014-12-30")
 end
 
 ##

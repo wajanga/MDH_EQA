@@ -14,6 +14,8 @@ gem 'highcharts-rails', '4.0.0'
 gem 'chartkick', '1.2.4'
 # Bundle for autocomplete
 gem 'rails4-autocomplete', '~> 1.0.7'
+# For enumeration columns in db
+gem 'enumerize', '~> 0.8.0'
 
 group :development, :test do
 	# Use sqlite3 as the database for Active Record

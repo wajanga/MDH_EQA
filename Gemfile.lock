@@ -52,6 +52,8 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     diff-lcs (1.2.5)
+    enumerize (0.8.0)
+      activesupport (>= 3.2)
     erubis (2.7.0)
     execjs (2.1.0)
     factory_girl (4.2.0)
@@ -210,6 +212,7 @@ DEPENDENCIES
   chartkick (= 1.2.4)
   childprocess (= 0.3.6)
   coffee-rails (= 4.0.1)
+  enumerize (~> 0.8.0)
   factory_girl_rails (= 4.2.1)
   faker (= 1.1.2)
   growl (= 1.0.3)
