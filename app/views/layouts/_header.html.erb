@@ -5,10 +5,10 @@
 				<nav>
 					<ul class="nav pull-right">
     					<% if signed_in? %>
-    						<li><%= link_to "Home",    root_path %></li>
-    						<li><%= link_to "Facilities",    '#' %></li>
-    						<li><%= link_to "Samples", '#' %></li>
-    						<li><%= link_to "Reports", '#' %></li>
+    						<li><%= link_to "Home", root_path %></li>
+    						<li><%= link_to "Facilities", root_path %></li>
+    						<li><%= link_to "Samples", eqa_tests_path %></li>
+    						<li><%= link_to "Reports", reports_path %></li>
             				<li><%= link_to "Sign out", signout_path, method: "delete" %></li>
           				<% end %>
 					</ul>

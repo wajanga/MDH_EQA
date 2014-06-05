@@ -2,12 +2,37 @@
 <div class="row">
   <aside class="span4">
     <section>
-      <h1><%= @facility.name %></h1>
-      <h1><%= @facility.district.name %></h1>
-      <h1><%= @facility.facility_type.name %></h1>
+      <h3><%= @facility.name %></h3>
+      <h3><%= @facility.district.name %></h3>
+      <h3><%= @facility.facility_type.name %></h3>
+      <div class="well well-large avg-score">
+      	<strong>Average Score: 100</strong>
+	  </div>
     </section>
   </aside>
-  <div class="span8">
-    
+  <div class="span6 pull-right">
+  	<h3 class="mdh-small-header">Results</h3>
+    <% if @facility.eqa_tests.empty? %>
+          <h4 class="muted">No samples have been sent yet</h4>
+    <% else %>
+  	 <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>EQA no.</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Results</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @facility.eqa_tests %>
+        </tbody>
+      </table>
+  	 </div>
+    <% end %>
+    <%= form_tag(new_sample_facility_path(@facility), method: "get") do %>
+      <%= submit_tag("New sample", class: "btn btn-primary") %>
+    <% end %>
   </div>
 </div>

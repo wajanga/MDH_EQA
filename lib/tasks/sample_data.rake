@@ -5,6 +5,7 @@ namespace :db do
     make_facility
     make_result
     make_eqa
+    make_sent_samples
   end
 end
 
@@ -50,6 +51,8 @@ def make_facility
   facility_type = FacilityType.create!(name: "Lab")
   Facility.create!(name: "Mwananyamala Regional Hospital", facility_type_id: facility_type.id, district_id: district.id,
     facility_no: 123)
+  Facility.create!(name: "Sinza Hospital", facility_type_id: facility_type.id, district_id: district.id,
+    facility_no: 321)
 end
 
 def make_result
@@ -61,6 +64,15 @@ end
 
 def make_eqa
   EqaTest.create!(eqa_number: "1", start_date: "2014-01-01", end_date: "2014-12-30")
+end
+
+def make_sent_samples
+  SentSample.create!(specimen_id: "A1", d_expected_result: "REACTIVE", u_expected_result: "REACTIVE", 
+    f_expected_result: "POSITIVE", eqa_test_id: 1, facility_id: 1)
+  SentSample.create!(specimen_id: "A2", d_expected_result: "NON-REACTIVE", u_expected_result: "N/A", 
+    f_expected_result: "NEGATIVE", eqa_test_id: 1, facility_id: 1)
+  SentSample.create!(specimen_id: "A3", d_expected_result: "NON-REACTIVE", u_expected_result: "N/A", 
+    f_expected_result: "NEGATIVE", eqa_test_id: 1, facility_id: 1)
 end
 
 ##

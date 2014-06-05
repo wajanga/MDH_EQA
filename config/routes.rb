@@ -1,14 +1,21 @@
 MDHEqa::Application.routes.draw do
   resources :facilities do
     get :autocomplete_district_name, :on => :collection
+    member do
+      get :new_sample
+    end
   end
-  resources :districts
   resources :results
+  resources :sent_samples
+  resources :eqa_tests
   resources :sessions, only: [:new, :create, :destroy]
   root  'sessions#new'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
   match '/demo', to: 'demo_pages#home',     via: 'get'
+  match '/result_page', to: 'results#show',     via: 'get'
+  match '/samples',   to: 'demo_pages#samples',   via: 'get'
+  match '/reports', to: 'demo_pages#reports', via: 'get'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

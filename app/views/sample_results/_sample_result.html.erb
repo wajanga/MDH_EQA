@@ -1,0 +1,9 @@
+<tr>
+	<td><%= sample_result.specimen_id %></td>
+	<td><%= sample_result.d_result %></td>
+    <td><%= @facility.sent_samples.where(eqa_test_id: @eqa.id, specimen_id: sample_result.specimen_id).first.d_expected_result %></td>
+    <td><%= sample_result.u_result %></td>
+    <td><%= @facility.sent_samples.where(eqa_test_id: @eqa.id, specimen_id: sample_result.specimen_id).first.u_expected_result %></td>
+    <td><%= sample_result.f_result %></td>
+    <td><%= @facility.sent_samples.where(eqa_test_id: @eqa.id, specimen_id: sample_result.specimen_id).first.f_expected_result %></td>
+</tr>

@@ -1,0 +1,22 @@
+<div class="row">
+		<div class="span6">
+			<ul class="result">
+				<li><strong>Sample Received:</strong> <span class="pull-right"><%= @result.sample_receive_date %></span></li>
+				<li><strong>Date DTSEluted</strong></li>
+				<li><strong>Test Done By:</strong> <span class="pull-right"><%= @result.done_by %></span></li>
+				<li><strong>Assay 1 Lot No:</strong> <span class="pull-right"><%= @result.assay1_no %></span></li>
+				<li><strong>Assay 2 Lot No:</strong> <span class="pull-right"><%= @result.assay2_no %></span></li>
+				<li><strong>Results Approved By:</strong> <span class="pull-right"><%= @result.approved_by %></span></li>
+			</ul>
+		</div>
+		<div class="span6">
+			<ul class="result">
+				<li><strong>Date Results Dispatched:</strong> <span class="pull-right"><%= @result.result_dispatched_date %></span></li>
+				<li><strong>Date Test Done:</strong> <span class="pull-right"><%= @result.test_done_date %></span></li>
+				<li><strong>Tester Category</strong></li>
+				<li><strong>Assay 1 Expiry Date:</strong> <span class="pull-right"><%= @result.assay1_expiry_date %></span></li>
+				<li><strong>Assay 2 Expiry Date:</strong> <span class="pull-right"><%= @result.assay2_expiry_date %></span></li>
+				<li><strong>Results Received Date:</strong> <span class="pull-right"><%= @result.result_received_date %></span></li>
+			</ul>
+		</div>
+	</div>

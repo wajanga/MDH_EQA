@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
 
 	def new
+    if signed_in?
+      redirect_to demo_path
+    end
 	end
 
 	def create

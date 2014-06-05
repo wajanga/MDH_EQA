@@ -1,7 +1,7 @@
 <tr>
    	<td><%= result.facility.facility_no %></td>
-    <td><%= result.facility.name %></td>
+    <td><%= link_to result.facility.name, result.facility %></td>
     <td><%= result.facility.district.name %></td>
     <td><%= result.facility.district.region.name %></td>
-    <td><%= result.facility.name %></td>
+    <td><%= result.score %></td>
 </tr>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601075527) do
+ActiveRecord::Schema.define(version: 20140604114234) do
 
   create_table "districts", force: true do |t|
     t.string   "name"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20140601075527) do
   end
 
   add_index "results", ["eqa_test_id"], name: "index_results_on_eqa_test_id"
+  add_index "results", ["facility_id", "eqa_test_id"], name: "index_results_on_facility_id_and_eqa_test_id", unique: true
   add_index "results", ["facility_id"], name: "index_results_on_facility_id"
   add_index "results", ["score"], name: "index_results_on_score"
 
@@ -109,17 +110,19 @@ ActiveRecord::Schema.define(version: 20140601075527) do
 
   create_table "sent_samples", force: true do |t|
     t.string   "specimen_id"
-    t.integer  "d_expected_result"
-    t.integer  "u_expected_result"
-    t.integer  "f_expected_result"
+    t.string   "d_expected_result"
+    t.string   "u_expected_result"
+    t.string   "f_expected_result"
     t.integer  "eqa_test_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "facility_id"
   end
 
   add_index "sent_samples", ["d_expected_result"], name: "index_sent_samples_on_d_expected_result"
   add_index "sent_samples", ["eqa_test_id"], name: "index_sent_samples_on_eqa_test_id"
   add_index "sent_samples", ["f_expected_result"], name: "index_sent_samples_on_f_expected_result"
+  add_index "sent_samples", ["facility_id"], name: "index_sent_samples_on_facility_id"
   add_index "sent_samples", ["u_expected_result"], name: "index_sent_samples_on_u_expected_result"
 
   create_table "users", force: true do |t|

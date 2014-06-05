@@ -1,0 +1,6 @@
+<tr>
+   	<td><%= eqa_test.eqa_number %></td>
+    <td><%= eqa_test.start_date %></td>
+    <td><%= eqa_test.end_date %></td>
+    <td><%= link_to 'View', result_page_path(fac: @facility.id, eqa: eqa_test.id) %></td>
+</tr>

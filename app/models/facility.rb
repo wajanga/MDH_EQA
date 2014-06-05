@@ -4,6 +4,7 @@ class Facility < ActiveRecord::Base
 	belongs_to :facility_type
 	has_many :sent_samples, dependent: :destroy
 	has_many :results, dependent: :destroy
+  has_many :eqa_tests, -> { uniq }, through: :sent_samples
 
 	validates :name,  presence: true
   validates :facility_type_id, presence: true

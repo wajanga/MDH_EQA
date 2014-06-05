@@ -1,0 +1,34 @@
+<% if @result.nil? || @facility.nil? || @eqa.nil? %>
+	<h1 class="muted">This facility has not yet sent it's results</h1>
+<% else %>
+	<h1 class="page-header">REPORT: EQA FOR HIV RAPID TEST</h1>
+	<h3 class="text-success center"><%= @facility.name %>, <%= @facility.district.name %> - <%= @facility.district.region.name %></h3>
+	<div class="mdh-sub-header"><strong>Facility Identity Number: <%= @facility.facility_no %></strong><strong class="pull-right">EQA Number: <%= @eqa.eqa_number %></strong></div>
+	<%= render 'result_details' %>
+	<div class="table-responsive">
+    	<table class="table table-striped table-sample-results table-bordered">
+      		<thead>
+        		<tr>
+        			<th></th>
+          			<th colspan="2">Determine</th>
+          			<th colspan="2">Unigold</th>
+          			<th colspan="2">Final Result</th>
+        		</tr>
+      		</thead>
+      		<tbody>
+ 				<tr>
+ 					<td>Specimen Id</td>
+   					<td>Your Input</td>
+    				<td>Expected Result</td>
+    				<td>Your Input</td>
+    				<td>Expected Result</td>
+    				<td>Your Final Result</td>
+    				<td>Expected Final Result</td>
+				</tr>
+				<% @result.sample_results.each do |sample_result| %>
+          			<%= render sample_result %>
+        		<% end %>
+      		</tbody>
+    	</table>
+  	</div>
+<% end %>

@@ -30,6 +30,7 @@ describe "Results Apis" do
         expect(Result.first.facility_id).to eq 1
         expect(Result.first.eqa_test_id).to eq 1
         expect(Result.count).to eq 1
+        expect(SampleResult.count).to eq 3
     end
   end
 

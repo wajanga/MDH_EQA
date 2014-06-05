@@ -1,0 +1,27 @@
+<% provide(:title, 'All EQAs') %>
+<h1>All EQAs</h1>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+        <thead>
+          <tr>
+            <th>EQA no.</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+        	<% @eqas.each do |eqa| %>
+        	<tr>
+   				<td><%= eqa.eqa_number %></td>
+    			<td><%= eqa.start_date %></td>
+    			<td><%= eqa.end_date %></td>
+			</tr>
+			<% end %>
+        </tbody>
+    </table>
+</div>
+<%= will_paginate @eqas %>
+<%= form_tag new_eqa_test_path, method: "get" do %>
+	<%= submit_tag("New EQA", class: "btn btn-primary") %>
+<% end %>

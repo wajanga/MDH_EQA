@@ -1,0 +1,2 @@
+class SentSamplesController < ApplicationController
+end

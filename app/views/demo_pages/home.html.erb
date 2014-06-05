@@ -1,4 +1,4 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
   <h1 class="page-header">EQA Results</h1>
 
   <div class="row placeholders">
@@ -13,6 +13,7 @@
   </div>
 
   <h2>Facilities</h2>
+
   <div class="table-responsive">
     <table class="table table-striped">
       <thead>
@@ -26,9 +27,10 @@
       </thead>
       <tbody>
         <% @results.each do |result| %>
-          <%= render @results %>
+          <%= render result %>
         <% end %>
       </tbody>
     </table>
   </div>
-</div>
+
+  <span class="center"><%= will_paginate @results %></span>

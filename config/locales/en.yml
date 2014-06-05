@@ -21,3 +21,8 @@
 
 en:
   hello: "Hello world"
+  enumerize:
+    sent_sample:
+      d_expected_result:
+        reactive: "REACTIVE"
+        non_reactive: "NON-REACTIVE"

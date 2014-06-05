@@ -1,0 +1,13 @@
+<%= render 'shared/error_messages', object: f.object %>
+
+<%= f.label :eqa_number %>
+<%= collection_select(:sent_sample, :eqa_test_id, EqaTest.all, :id, :eqa_number) %>
+
+<div class="row">
+	<div class="span8">
+	<%= f.text_field :specimen_id, class: "span2", placeholder: "Specimen ID" %>
+	<%= f.text_field :d_expected_result, class: "span2", placeholder: "Determine" %>
+	<%= f.text_field :specimen_id,  class: "span2", placeholder: "Unigold" %>
+	<%= f.text_field :specimen_id, class: "span2", placeholder: "Final" %>
+	</div>
+</div>
