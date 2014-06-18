@@ -6,7 +6,7 @@
       <h3><%= @facility.district.name %></h3>
       <h3><%= @facility.facility_type.name %></h3>
       <div class="well well-large avg-score">
-      	<strong>Average Score: 100</strong>
+      	<strong>Average Score: <%= @facility.results.average(:score) %></strong>
 	  </div>
     </section>
   </aside>

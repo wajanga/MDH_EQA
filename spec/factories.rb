@@ -33,4 +33,13 @@ FactoryGirl.define do
     result_dispatched_date "2014-01-01"
     result_received_date "2014-01-01"
   end
+
+  factory :sent_sample do
+    specimen_id "A1"
+    d_expected_result "REACTIVE"
+    u_expected_result "REACTIVE"
+    f_expected_result "POSITIVE"
+    eqa_test_id 1
+    facility_id 1
+  end
 end

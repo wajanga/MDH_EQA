@@ -16,6 +16,8 @@ class ResultsController < ApplicationController
 		@res.facility_id = Facility.find_by(facility_no: @result_hash[:facility_id]).id
 		@res.eqa_test_id = EqaTest.where("start_date < ? AND end_date > ?", 
 			@result_hash[:result_received_date], @result_hash[:result_received_date]).first.id
+		@res.score = calculate_score(@res.facility_id, @res.eqa_test_id) # calculate the score
+
 		@res.sample_results.build(@samples_hash[:sample_results])
 
 		if @res.save
@@ -36,6 +38,18 @@ class ResultsController < ApplicationController
       			:assay1_no, :assay2_no, :approved_by, :test_done_date, :assay1_expiry_date,
       			:assay2_expiry_date, :result_received_date)
       		@samples_hash = params.require(:result).permit(sample_results: [:specimen_id, :d_result, :u_result, :f_result])
+    	end
+
+    	def calculate_score(facility_id, eqa_test_id)
+    		score = 10
+    		sent_samples = SentSample.where(facility_id: facility_id, eqa_test_id: eqa_test_id)
+    		sent_samples.each { |sample|
+    			result_sample = @samples_hash[:sample_results].select {|i| i.has_value?(sample.specimen_id)}[0]
+    			score += 10 if (result_sample[:d_result] == sample.d_expected_result)
+    			score += 10 if (result_sample[:u_result] == sample.u_expected_result)
+    			score += 10 if (result_sample[:f_result] == sample.f_expected_result)
+      		}
+      		return score
     	end
 
 end
