@@ -24,6 +24,11 @@ section {
   overflow: auto;
 }
 
+legend {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 textarea {
   resize: vertical;
 }

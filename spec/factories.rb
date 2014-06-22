@@ -42,4 +42,12 @@ FactoryGirl.define do
     eqa_test_id 1
     facility_id 1
   end
+
+  factory :eqa_sample do
+    specimen_id "A1"
+    d_expected_result "REACTIVE"
+    u_expected_result "REACTIVE"
+    f_expected_result "POSITIVE"
+    eqa_test_id 1
+  end
 end

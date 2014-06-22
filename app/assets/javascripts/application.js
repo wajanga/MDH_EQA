@@ -12,9 +12,11 @@
 //
 //= require jquery
 //= require jquery-ui
+//= require filterrific-jquery
 //= require autocomplete-rails
 //= require jquery_ujs
 //= require bootstrap
+//= require bootstrap-datepicker
 //= require highcharts
 //= require highcharts/highcharts-more
 //= require turbolinks

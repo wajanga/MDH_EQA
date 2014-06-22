@@ -3,6 +3,27 @@ class FacilitiesController < ApplicationController
 
   autocomplete :district, :name
 
+  def index
+    @filterrific = Filterrific.new(Facility, params[:filterrific] || session[:filterrific_facilities])
+    @filterrific.select_options = { sorted_by: Facility.options_for_sorted_by, with_district_id: District.options_for_select }
+
+    @facilities = Facility.filterrific_find(@filterrific).page(params[:page])
+
+    session[:filterrific_facilities] = @filterrific.to_hash
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def reset_filterrific
+    # Clear session persistence
+    session[:filterrific_facilities] = nil
+    # Redirect back to the index action for default filter settings.
+    redirect_to :action => :index
+  end
+
 	def show
     @facility = Facility.find(params[:id])
   end

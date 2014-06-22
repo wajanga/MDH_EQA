@@ -1,6 +1,7 @@
 MDHEqa::Application.routes.draw do
   resources :facilities do
     get :autocomplete_district_name, :on => :collection
+    get :reset_filterrific, :on => :collection
     member do
       get :new_sample
     end
@@ -16,6 +17,7 @@ MDHEqa::Application.routes.draw do
   match '/result_page', to: 'results#show',     via: 'get'
   match '/samples',   to: 'demo_pages#samples',   via: 'get'
   match '/reports', to: 'demo_pages#reports', via: 'get'
+  match '/reports_reset', to: 'demo_pages#reset_filterrific', via: 'get'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

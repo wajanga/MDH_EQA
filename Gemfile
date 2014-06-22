@@ -16,6 +16,10 @@ gem 'chartkick', '1.2.4'
 gem 'rails4-autocomplete', '~> 1.0.7'
 # For enumeration columns in db
 gem 'enumerize', '~> 0.8.0'
+# Bundle for table with filter
+gem 'filterrific'
+# Bundle for calendar
+gem 'bootstrap-datepicker-rails'
 
 group :development, :test do
 	# Use sqlite3 as the database for Active Record

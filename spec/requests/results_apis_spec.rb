@@ -39,6 +39,17 @@ describe "Results Apis" do
         expect(SampleResult.count).to eq 3
     end
 
+    it "submits a result with a non-existant facility" do
+        result_params["result"]["facility_id"] = 999
+        result_params_json = result_params.to_json
+        post results_path, result_params_json, request_headers
+
+        expect(response.status).to eq 404
+
+        body = JSON.parse(response.body)
+        expect(body['errors']).to eq(["Facility does not exist"])
+    end
+
     describe "calculates the correct score" do
         it "of 90" do
             result_params["result"]["sample_results"][0]["f_result"] = "NEGATIVE"

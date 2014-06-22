@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140604114234) do
+ActiveRecord::Schema.define(version: 20140622082056) do
 
   create_table "districts", force: true do |t|
     t.string   "name"
@@ -23,6 +23,19 @@ ActiveRecord::Schema.define(version: 20140604114234) do
   add_index "districts", ["name"], name: "index_districts_on_name"
   add_index "districts", ["region_id"], name: "index_districts_on_region_id"
 
+  create_table "eqa_samples", force: true do |t|
+    t.string   "specimen_id"
+    t.string   "d_expected_result"
+    t.string   "u_expected_result"
+    t.string   "f_expected_result"
+    t.integer  "eqa_test_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "eqa_samples", ["eqa_test_id"], name: "index_eqa_samples_on_eqa_test_id"
+  add_index "eqa_samples", ["specimen_id", "eqa_test_id"], name: "index_eqa_samples_on_specimen_id_and_eqa_test_id", unique: true
+
   create_table "eqa_tests", force: true do |t|
     t.string   "eqa_number"
     t.date     "start_date"
@@ -31,7 +44,7 @@ ActiveRecord::Schema.define(version: 20140604114234) do
     t.datetime "updated_at"
   end
 
-  add_index "eqa_tests", ["eqa_number"], name: "index_eqa_tests_on_eqa_number"
+  add_index "eqa_tests", ["eqa_number"], name: "index_eqa_tests_on_eqa_number", unique: true
 
   create_table "facilities", force: true do |t|
     t.string   "name"

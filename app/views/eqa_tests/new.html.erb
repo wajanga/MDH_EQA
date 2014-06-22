@@ -2,6 +2,11 @@
 <h1>Create new EQA</h1>
 
 <div class="row">
-	<div class="span8 offset2">
+	<div class="span12">
+		<%= form_for(@eqa_test) do |f| %>
+		<%= render 'fields', f: f %>
+
+		<%= f.submit "Create EQA", class: "btn btn-large btn-primary" %>
+    <% end %>
 	</div>
 </div>

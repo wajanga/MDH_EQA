@@ -8,6 +8,8 @@
             <th>EQA no.</th>
             <th>Start Date</th>
             <th>End Date</th>
+            <th>Status</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -16,6 +18,12 @@
    				<td><%= eqa.eqa_number %></td>
     			<td><%= eqa.start_date %></td>
     			<td><%= eqa.end_date %></td>
+                <td></td>
+                <td>
+                    <%= link_to "show", eqa, class: 'btn' %>
+                    <%= link_to "edit", edit_eqa_test_path(eqa), class: 'btn btn-primary' %>
+                    <%= link_to "delete", eqa, method: :delete, data: { confirm: "Are You sure?" }, class: 'btn btn-danger' %>
+                </td>
 			</tr>
 			<% end %>
         </tbody>

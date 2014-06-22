@@ -1,0 +1,48 @@
+<%= render 'shared/error_messages', object: f.object %>
+
+<legend>EQA</legend>
+
+<div class="row">
+	<div class="span2">
+		<%= f.label :eqa_number %>
+		<%= f.text_field :eqa_number %>
+	</div>
+
+	<div class="span3">
+		<%= f.label :start_date %>
+		<%= f.text_field :start_date, 'data-behaviour' => 'datepicker' %>
+	</div>
+
+	<div class="span3">
+		<%= f.label :end_date %>
+		<%= f.text_field :end_date, 'data-behaviour' => 'datepicker' %>
+	</div>
+</div>
+
+<legend>Samples</legend>
+
+<%= f.fields_for :eqa_samples do |eqa_sample| %>
+
+<div class="row">
+	<div class="span2">
+		<%= eqa_sample.label :specimen_id, "Specimen ID" %>
+		<%= eqa_sample.select(:specimen_id, EqaSample.specimen_ids) %>
+	</div>
+
+	<div class="span3">
+		<%= eqa_sample.label :d_expected_result, "Expected Determine Result" %>
+		<%= eqa_sample.select(:d_expected_result, EqaSample.d_results) %>
+	</div>
+
+	<div class="span3">
+		<%= eqa_sample.label :u_expected_result, "Expected Unigold Result" %>
+		<%= eqa_sample.select(:u_expected_result, EqaSample.u_results) %>
+	</div>
+
+	<div class="span3">
+		<%= eqa_sample.label :f_expected_result, "Expected Final Result" %>
+		<%= eqa_sample.select(:f_expected_result, EqaSample.f_results) %>
+	</div>
+</div>
+
+<% end %>

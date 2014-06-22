@@ -1,0 +1,22 @@
+<h1 class="page-header">Reports</h1>
+
+<div class="well">
+  <%= form_for @filterrific do |f| %>
+  <div class="row">
+    <div class="span3">
+      Search
+      <%= f.text_field(:search_query, :class => 'filterrific-periodically-observed') %>
+    </div>
+    <div class="span3">
+      District
+      <%= f.select(:with_district_id, District.options_for_select, { :include_blank => '- Any -' }) %>
+    </div>
+    <div class="span5">
+      Sorted by
+      <%= f.select(:sorted_by, Facility.options_for_sorted_by) %>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<%= render(:partial => 'facilities/list', :locals => { :facilities => @facilities }) %>
