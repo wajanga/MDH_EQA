@@ -20,7 +20,6 @@ class ResultsController < ApplicationController
 		# Return error if facility is not found
 		return render :json => { :errors => ["Facility does not exist"] }, :status => 404 if facility.nil?
 
-		#@res.facility_id = Facility.find_by(facility_no: @result_hash[:facility_id]).id
 		@res.facility_id = facility.id
 		@res.eqa_test_id = EqaTest.where("start_date < ? AND end_date > ?", 
 			@result_hash[:result_received_date], @result_hash[:result_received_date]).first.id

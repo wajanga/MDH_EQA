@@ -1,6 +1,9 @@
 <% provide(:title, 'All EQAs') %>
 <h1>All EQAs</h1>
 
+<% if @eqas.empty? %>
+<h4 class="muted center">There are currently no registered EQAs</h4>
+<% else %>
 <div class="table-responsive">
 	<table class="table table-striped">
         <thead>
@@ -18,11 +21,11 @@
    				<td><%= eqa.eqa_number %></td>
     			<td><%= eqa.start_date %></td>
     			<td><%= eqa.end_date %></td>
-                <td></td>
+                <td><% if eqa.end_date < Date.today %><span class="muted">Ended</span><% else %>Active<% end %></td>
                 <td>
                     <%= link_to "show", eqa, class: 'btn' %>
                     <%= link_to "edit", edit_eqa_test_path(eqa), class: 'btn btn-primary' %>
-                    <%= link_to "delete", eqa, method: :delete, data: { confirm: "Are You sure?" }, class: 'btn btn-danger' %>
+                    <%= link_to "delete", eqa, method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: 'btn btn-danger' %>
                 </td>
 			</tr>
 			<% end %>
@@ -30,6 +33,7 @@
     </table>
 </div>
 <%= will_paginate @eqas %>
+<% end %>
 <%= form_tag new_eqa_test_path, method: "get" do %>
 	<%= submit_tag("New EQA", class: "btn btn-primary") %>
 <% end %>

@@ -43,18 +43,29 @@ class FacilitiesController < ApplicationController
   end
 
   def new_sample
-    #@facility = Facility.find(params[:id])
-    if @samples = SentSample.where(facility_id: params[:id], eqa_test_id: 1).exists?
-      flash[:error] = 'Sample already sent'
+    eqa_test = EqaTest.find_by("start_date <= :date AND end_date >= :date", date: Date.today)
+    if eqa_test.blank?
+      flash[:error] = 'There is currently no active EQA. Please create one first.'
     else
-      @samples = SentSample.where(facility_id: 1, eqa_test_id: 1)
-      @samples.each { |sample|  
-        new_sample = sample.dup
-        new_sample.facility_id = params[:id]
-        new_sample.save
-      }
+      if @samples = SentSample.where(facility_id: params[:id], eqa_test_id: eqa_test.id).exists?
+        flash[:error] = 'Sample already sent for the current EQA'
+      else
+        @samples = eqa_test.eqa_samples
+        @samples.each { |sample|
+          new_sent_sample = SentSample.new
+          new_sent_sample.attributes = sample.attributes
+          new_sent_sample.facility_id = params[:id]
+          new_sent_sample.save
+        }
+        result = Result.find_by(facility_id: params[:id], eqa_test_id: eqa_test.id)
+        unless result.blank?
+          result.score = result.calculate_score
+          result.save
+        end
+      end
     end
-    redirect_to facility_url(params[:id])
+    #redirect_to facility_url(params[:id])
+    redirect_to facility_path(params[:id])
   end
 
   private

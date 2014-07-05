@@ -3,9 +3,9 @@ namespace :db do
   task populate: :environment do
     make_users
     make_facility
-    #make_result
-    make_eqa
-    make_sent_samples
+    make_result
+    #make_eqa
+    #make_sent_samples
   end
 end
 

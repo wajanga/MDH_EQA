@@ -1,19 +1,15 @@
 class EqaTestsController < ApplicationController
   before_action :signed_in_user
   before_action :compare_dates, only: :create
+  before_action :check_active_eqa, only: :new
 
 	def index
     @eqas = EqaTest.paginate(page: params[:page])
   end
 
   def new
-  	if EqaTest.where("start_date <= :date AND end_date >= :date", date: Date.today).exists?
-  		flash[:error] = 'EQA already in progress'
-  		redirect_to eqa_tests_url
-  	else
-      @eqa_test = EqaTest.new
-      3.times { @eqa_test.eqa_samples.build}
-  	end
+    @eqa_test = EqaTest.new
+    3.times { @eqa_test.eqa_samples.build}
   end
 
   def create
@@ -61,9 +57,16 @@ class EqaTestsController < ApplicationController
   # Before filters
 
   def compare_dates
-    unless eqa_params[:end_date] >= eqa_params[:start_date]
-      flash[:error] = "End date is must be greater start date"
+    if eqa_params[:end_date] < eqa_params[:start_date]
+      flash[:error] = "The end date must be greater than the start date"
       redirect_to new_eqa_test_url
+    end
+  end
+
+  def check_active_eqa
+    if EqaTest.where("start_date <= :date AND end_date >= :date", date: Date.today).exists?
+      flash[:error] = 'An EQA test is already in progress'
+      redirect_to eqa_tests_url
     end
   end
 
