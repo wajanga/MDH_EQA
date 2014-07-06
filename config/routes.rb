@@ -16,8 +16,8 @@ MDHEqa::Application.routes.draw do
   match '/demo', to: 'demo_pages#home',     via: 'get'
   match '/result_page', to: 'results#show',     via: 'get'
   match '/samples',   to: 'demo_pages#samples',   via: 'get'
-  match '/reports', to: 'demo_pages#reports', via: 'get'
-  match '/reports_reset', to: 'demo_pages#reset_filterrific', via: 'get'
+  match '/reports', to: 'reports#index', via: 'get'
+  match '/reports_reset', to: 'reports#reset_filterrific', via: 'get'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

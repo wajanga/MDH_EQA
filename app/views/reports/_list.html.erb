@@ -1,0 +1,31 @@
+<div id="results">
+
+  <div class="well well-small">
+    <%= page_entries_info facilities, :model => 'facility' %>
+    <%= render_filterrific_spinner %>
+    <span class="pull-right"><%= link_to "Reset filters", reports_reset_path, :class => 'btn btn-small' %></span>
+  </div>
+
+  <div class="table-responsive ">
+    <table class="table table-striped">
+      <tr>
+        <th>Name</th>
+        <th>Facility No.</th>
+        <th>District</th>
+        <th>Facility type</th>
+        <th>Registered at</th>
+      </tr>
+      <% facilities.each do |facility| %>
+      <tr>
+        <td><%= link_to(facility.name, facility_path(facility)) %></td>
+        <td><%= facility.facility_no %></td>
+        <td><%= facility.district_name %></td>
+        <td><%= facility.facility_type_name %></td>
+        <td><%= facility.created_at %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<%= will_paginate facilities %>

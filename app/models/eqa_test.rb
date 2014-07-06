@@ -11,4 +11,8 @@ class EqaTest < ActiveRecord::Base
 
 	accepts_nested_attributes_for :eqa_samples, allow_destroy: true
 
+	def self.options_for_select
+  		order('eqa_number').map { |e| [e.eqa_number, e.id] }
+	end
+
 end

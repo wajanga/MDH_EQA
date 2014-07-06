@@ -2,6 +2,7 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
     make_users
+    make_facility_types
     make_facility
     make_result
     #make_eqa
@@ -41,17 +42,20 @@ def make_districts
 end
 
 def make_facility_types
-  FacilityType.create!(name: "Lab")
+  FacilityType.create!(name: "LAB")
   FacilityType.create!(name: "PMTCT")
+  FacilityType.create!(name: "PICT")
+  FacilityType.create!(name: "VCT")
+  FacilityType.create!(name: "TB-HIV")
 end
 
 def make_facility
   region = Region.create!(name: "Dar-es-Salaam")
   district = region.districts.create!(name: "Kinondoni")
-  facility_type = FacilityType.create!(name: "Lab")
-  Facility.create!(name: "Mwananyamala Regional Hospital", facility_type_id: facility_type.id, district_id: district.id,
+  #facility_type = FacilityType.create!(name: "Lab")
+  Facility.create!(name: "Mwananyamala Regional Hospital", facility_type_id: 1, district_id: district.id,
     facility_no: 123)
-  Facility.create!(name: "Sinza Hospital", facility_type_id: facility_type.id, district_id: district.id,
+  Facility.create!(name: "Sinza Hospital", facility_type_id: 2, district_id: district.id,
     facility_no: 321)
 end
 

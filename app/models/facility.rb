@@ -15,12 +15,20 @@ class Facility < ActiveRecord::Base
   	district.try(:name)
   end
 
+  def facility_type_name
+    facility_type.try(:name)
+  end
+
   def district_name=(name)
   	self.district = District.find_by_name(name) if name.present?
   end
 
+  def facility_type_name=(name)
+    self.district = FacilityType.find_by_name(name) if name.present?
+  end
+
   filterrific :default_settings => { :sorted_by => 'created_at_desc' }, :filter_names => %w[sorted_by search_query 
-    with_district_id with_created_at_gte]
+    filter_by_test_status with_facility_type_id with_eqa_test_id]
 
   # default for will_paginate
   self.per_page = 10
@@ -32,6 +40,13 @@ class Facility < ActiveRecord::Base
       ['Registration date (oldest first)', 'created_at_asc'],
       ['District (a-z)', 'district_name_asc'],
       ['Facility # (a-z)', 'facility_no_asc']
+    ]
+  end
+
+  def self.options_for_filter_by_test_status
+    [
+      ['Done', 'Done'],
+      ['Pending', 'Pending']
     ]
   end
 
@@ -52,8 +67,8 @@ class Facility < ActiveRecord::Base
     # change the number of OR conditions.
     num_or_conditions = 2
 
-    where(terms.map { |term|
-      "(LOWER(facilities.name) LIKE ? OR LOWER(facilities.facility_no) LIKE ?)"
+    joins(:district).where(terms.map { |term|
+      "(LOWER(facilities.name) LIKE ? OR LOWER(districts.name) LIKE ?)"
     }.join(' AND '), *terms.map { |e| [e] * num_or_conditions }.flatten)
   }
 
@@ -74,12 +89,22 @@ class Facility < ActiveRecord::Base
     end
   }
 
-  scope :with_district_id, lambda { |district_ids|
-    where(:district_id => [*district_ids])
+  scope :with_facility_type_id, lambda { |facility_type_ids|
+    where(:facility_type_id => [*facility_type_ids])
   }
 
-  scope :with_created_at_gte, lambda { |ref_date|
-    where('facilites.created_at >= ?', ref_date)
+  scope :with_eqa_test_id, lambda { |eqa_test_id|
+    #where(:eqa_test_id => [*eqa_test_ids])
+    includes(:results).where(results: {eqa_test_id: eqa_test_id}).references(:results)
+  }
+
+  scope :filter_by_test_status, lambda { |filter_option|
+    filter_option_string = filter_option.to_s
+    if (filter_option_string == 'Done')
+      includes(:results).where.not(results: {id: nil}).references(:results)
+    elsif (filter_option_string == 'Pending')
+      includes(:results).where(results: {id: nil}).references(:results)
+    end
   }
 
   def decorated_created_at
