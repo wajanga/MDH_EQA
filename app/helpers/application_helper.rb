@@ -10,4 +10,15 @@ module ApplicationHelper
     	end
   	end
 
+  	# Returns comments depending on score value
+  	def display_score(score)
+  		if (95 <= score && score <= 100)
+  			"#{score} - Successful"
+  		elsif (90 <= score && score < 95)
+  			"#{score} - Satisfactory"
+  		else
+  			"#{score} - Unatisfactory"
+  		end
+  	end
+
 end

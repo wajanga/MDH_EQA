@@ -2,7 +2,7 @@
 	<h1 class="muted">This facility has not yet sent it's results</h1>
 <% else %>
 	<h1 class="page-header">REPORT: EQA FOR HIV RAPID TEST</h1>
-  <h3 class="page-header center">Score: <%= @result.score %></h3>
+  <h3 class="page-header center">Score: <%= display_score(@result.score) %></h3>
 	<h3 class="text-success center"><%= @facility.name %>, <%= @facility.district.name %> - <%= @facility.district.region.name %></h3>
 	<div class="mdh-sub-header"><strong>Facility Identity Number: <%= @facility.facility_no %></strong><strong class="pull-right">EQA Number: <%= @eqa.eqa_number %></strong></div>
 	<%= render 'result_details' %>
