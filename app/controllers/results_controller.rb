@@ -26,7 +26,7 @@ class ResultsController < ApplicationController
 		return render :json => { :errors => ["There is no active EQA"] }, :status => 405 if eqa_test.blank?
 
 		@res.eqa_test_id = eqa_test.take.id
-		
+
 		@res.score = calculate_score(@res.facility_id, @res.eqa_test_id) # calculate the score
 
 		@res.sample_results.build(@samples_hash[:sample_results])
@@ -42,6 +42,16 @@ class ResultsController < ApplicationController
 		redirect_to root_path
 	end
 
+	def check_facility
+		facility_request_hash = parse_facility_request
+		facility = Facility.find_by(facility_no: facility_request_hash[:facility_id])
+		if facility.blank?
+			return render :json => { :error => "Facility does not exist" }, :status => 404
+		else
+			return render :json => { :name => "#{facility.name}" }, :status => 200
+		end
+	end
+
 	private
 
     	def parse_json
@@ -49,6 +59,10 @@ class ResultsController < ApplicationController
       			:assay1_no, :assay2_no, :approved_by, :test_done_date, :assay1_expiry_date,
       			:assay2_expiry_date, :result_received_date)
       		@samples_hash = params.require(:result).permit(sample_results: [:specimen_id, :d_result, :u_result, :f_result])
+    	end
+
+    	def parse_facility_request
+    		params.require(:request).permit(:facility_id)
     	end
 
     	def calculate_score(facility_id, eqa_test_id)

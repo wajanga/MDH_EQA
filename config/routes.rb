@@ -6,7 +6,9 @@ MDHEqa::Application.routes.draw do
       get :new_sample
     end
   end
-  resources :results
+  resources :results do
+    collection { post :check_facility }
+  end
   resources :sent_samples
   resources :eqa_tests
   resources :sessions, only: [:new, :create, :destroy]

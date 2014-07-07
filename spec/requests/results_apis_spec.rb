@@ -75,6 +75,39 @@ describe "Results Apis" do
             expect(Result.first.score).to eq 70
         end
     end
+
+    describe "checks facility" do
+        let(:request_params) do 
+            {"request" => {"facility_id"=>123}}
+        end
+        let(:request_headers) do
+            request_headers = {
+                "Accept" => "application/json",
+                "Content-Type" => "application/json"
+            }
+        end
+
+        it "should return facility name if existing" do
+            request_params_json = request_params.to_json
+            post check_facility_results_path, request_params_json, request_headers
+
+            expect(response.status).to eq 200
+
+            body = JSON.parse(response.body)
+            expect(body['name']).to eq("Mwananyamala Regional Hospital")
+        end
+
+        it "should return error if non-existing" do
+            request_params["request"]["facility_id"] = 999
+            request_params_json = request_params.to_json
+            post check_facility_results_path, request_params_json, request_headers
+
+            expect(response.status).to eq 404
+
+            body = JSON.parse(response.body)
+            expect(body['error']).to eq("Facility does not exist")
+        end
+    end
   end
 
 end
