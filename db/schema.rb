@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140622082056) do
+ActiveRecord::Schema.define(version: 20140706200249) do
 
   create_table "districts", force: true do |t|
     t.string   "name"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20140622082056) do
   end
 
   add_index "facilities", ["district_id"], name: "index_facilities_on_district_id"
-  add_index "facilities", ["facility_no"], name: "index_facilities_on_facility_no"
+  add_index "facilities", ["facility_no"], name: "index_facilities_on_facility_no", unique: true
   add_index "facilities", ["facility_type_id"], name: "index_facilities_on_facility_type_id"
 
   create_table "facility_types", force: true do |t|

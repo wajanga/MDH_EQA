@@ -6,7 +6,7 @@
 					<ul class="nav pull-right">
     					<% if signed_in? %>
     						<li><%= link_to "Home", root_path %></li>
-    						<li><%= link_to "Facilities", root_path %></li>
+    						<li><%= link_to "Facilities", facilities_path %></li>
     						<li><%= link_to "EQAs", eqa_tests_path %></li>
     						<li><%= link_to "Reports", reports_path %></li>
             				<li><%= link_to "Sign out", signout_path, method: "delete" %></li>

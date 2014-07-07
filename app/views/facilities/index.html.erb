@@ -1,22 +1,47 @@
-<h1 class="page-header">Reports</h1>
+<% provide(:title, 'Facilities') %>
+<h1>Facilities</h1>
 
-<div class="well">
-  <%= form_for @filterrific do |f| %>
-  <div class="row">
-    <div class="span3">
-      Search
-      <%= f.text_field(:search_query, :class => 'filterrific-periodically-observed') %>
-    </div>
-    <div class="span3">
-      District
-      <%= f.select(:with_district_id, District.options_for_select, { :include_blank => '- Any -' }) %>
-    </div>
-    <div class="span5">
-      Sorted by
-      <%= f.select(:sorted_by, Facility.options_for_sorted_by) %>
-    </div>
-  </div>
+<% if @facilities.empty? %>
+<h4 class="muted center">Empty</h4>
+<% else %>
+<div class="table-responsive">
+  <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Facility #</th>
+            <th>Name</th>
+            <th>Facility Type</th>
+            <th>District</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @facilities.each do |facility| %>
+          <tr>
+            <td><%= facility.facility_no %></td>
+            <td><%= link_to facility.name, facility %></td>
+            <td><%= facility.facility_type.name %></td>
+            <td><%= facility.district.name %></td>
+            <td>
+              <%= link_to "edit", edit_facility_path(facility), class: 'btn btn-primary' %>
+              <%= link_to "delete", facility, method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: 'btn btn-danger' %>
+            </td>
+          </tr>
+      <% end %>
+        </tbody>
+    </table>
+</div>
+<%= will_paginate @facilities %>
+<% end %>
+
+<%= form_tag new_facility_path, method: "get" do %>
+  <%= submit_tag("New Facility", class: "btn btn-primary") %>
+<% end %>
+
+<div>
+<h4>Import a CSV File</h4>
+  <%= form_tag import_facilities_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag("Import CSV", class: "btn btn-small") %>
   <% end %>
 </div>
-
-<%= render(:partial => 'facilities/list', :locals => { :facilities => @facilities }) %>

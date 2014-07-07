@@ -9,7 +9,7 @@ class Facility < ActiveRecord::Base
 	validates :name,  presence: true
   validates :facility_type_id, presence: true
   validates :district_id, presence: true
-  validates :facility_no,  presence: true
+  validates :facility_no,  presence: true, uniqueness: true
 
   def district_name
   	district.try(:name)

@@ -4,28 +4,25 @@ class FacilitiesController < ApplicationController
   autocomplete :district, :name
 
   def index
-    @filterrific = Filterrific.new(Facility, params[:filterrific] || session[:filterrific_facilities])
-    @filterrific.select_options = { sorted_by: Facility.options_for_sorted_by, with_district_id: District.options_for_select }
-
-    @facilities = Facility.filterrific_find(@filterrific).page(params[:page])
-
-    session[:filterrific_facilities] = @filterrific.to_hash
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-
-  def reset_filterrific
-    # Clear session persistence
-    session[:filterrific_facilities] = nil
-    # Redirect back to the index action for default filter settings.
-    redirect_to :action => :index
+    @facilities = Facility.paginate(page: params[:page], per_page: 20)
   end
 
 	def show
     @facility = Facility.find(params[:id])
+  end
+
+  def edit
+    @facility = Facility.find(params[:id])
+  end
+
+  def update
+    @facility = Facility.find(params[:id])
+    if @facility.update_attributes(facility_params)
+      flash[:success] = "Facility updated successfully"
+      redirect_to facilities_path
+    else
+      render 'edit'
+    end
   end
 
   def new
@@ -33,10 +30,17 @@ class FacilitiesController < ApplicationController
   end
 
   def create
-  	district = District.find_by(name: params[:facility][:district_name])
-    @facility = Facility.new(name: params[:facility][:name], district_id: district.id, facility_type_id: params[:facility][:facility_type_id])
+  	district = District.find_by(name: facility_params[:district_name])
+    if (district.blank?)
+      # Do something
+    else
+      @facility = Facility.new(name: facility_params[:name], 
+        district_id: district.id, facility_type_id: facility_params[:facility_type_id], 
+        facility_no: facility_params[:facility_no])
+    end
     if @facility.save
-      		
+      flash[:success] = "Facility #{@facility.name} has been created successfully"
+      redirect_to facilities_url	
     else
       render 'new'
     end
@@ -68,10 +72,16 @@ class FacilitiesController < ApplicationController
     redirect_to facility_path(params[:id])
   end
 
+  def destroy
+    Facility.find(params[:id]).destroy
+    flash[:success] = "Facility deleted successfully"
+    redirect_to facilities_path
+  end
+
   private
 
-    def user_params
-      params.require(:facility).permit(:name, :district_name, :facility_type_id)
+    def facility_params
+      params.require(:facility).permit(:name, :district_name, :facility_type_id, :facility_no)
     end
 
 end

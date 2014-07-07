@@ -34,7 +34,7 @@ class EqaTestsController < ApplicationController
   def update
     @eqa_test = EqaTest.find(params[:id])
     if @eqa_test.update_attributes(eqa_params)
-      flash[:success] = "EQA updated"
+      flash[:success] = "EQA updated successfully"
       redirect_to eqa_tests_path
     else
       render 'edit'
@@ -43,7 +43,7 @@ class EqaTestsController < ApplicationController
 
   def destroy
       EqaTest.find(params[:id]).destroy
-      flash[:success] = "EQA deleted"
+      flash[:success] = "EQA deleted successfully"
       redirect_to eqa_tests_path
   end
 
