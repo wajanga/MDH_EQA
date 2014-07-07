@@ -4,7 +4,7 @@ namespace :db do
     make_users
     make_facility_types
     make_facility
-    make_result
+    #make_result
     #make_eqa
     #make_sent_samples
   end
