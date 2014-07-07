@@ -21,8 +21,12 @@ class ResultsController < ApplicationController
 		return render :json => { :errors => ["Facility does not exist"] }, :status => 404 if facility.nil?
 
 		@res.facility_id = facility.id
-		@res.eqa_test_id = EqaTest.where("start_date < ? AND end_date > ?", 
-			@result_hash[:result_received_date], @result_hash[:result_received_date]).first.id
+		eqa_test = EqaTest.where("start_date <= ? AND end_date >= ?", 
+			@result_hash[:result_received_date], @result_hash[:result_received_date])
+		return render :json => { :errors => ["There is no active EQA"] }, :status => 405 if eqa_test.blank?
+
+		@res.eqa_test_id = eqa_test.take.id
+		
 		@res.score = calculate_score(@res.facility_id, @res.eqa_test_id) # calculate the score
 
 		@res.sample_results.build(@samples_hash[:sample_results])

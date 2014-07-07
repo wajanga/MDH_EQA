@@ -15,9 +15,9 @@ class Result < ActiveRecord::Base
     		sent_samples.each { |sample|
     			result_sample = self.sample_results.where(specimen_id: sample.specimen_id).take
 
-    			sc += 10 if (result_sample.d_expected_result == sample.d_expected_result)
-    			sc += 10 if (result_sample.u_expected_result == sample.u_expected_result)
-    			sc += 10 if (result_sample.f_expected_result == sample.f_expected_result)
+    			sc += 10 if (result_sample.d_result == sample.d_expected_result)
+    			sc += 10 if (result_sample.u_result == sample.u_expected_result)
+    			sc += 10 if (result_sample.f_result == sample.f_expected_result)
       		}
       	end
       	return sc
