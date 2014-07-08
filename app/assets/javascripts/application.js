@@ -17,6 +17,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require bootstrap-datepicker
+//= require jasny-bootstrap
 //= require highcharts
 //= require highcharts/highcharts-more
 //= require turbolinks

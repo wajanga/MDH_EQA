@@ -1,4 +1,6 @@
 class Facility < ActiveRecord::Base
+  #require 'csv'
+  require 'roo'
 
 	belongs_to :district
 	belongs_to :facility_type
@@ -110,5 +112,49 @@ class Facility < ActiveRecord::Base
   def decorated_created_at
     created_at.to_date.to_s(:long)
   end
+
+  def self.import(file)
+    spreadsheet = open_spreadsheet(file)
+    header = spreadsheet.row(1)
+    (2..spreadsheet.last_row).each do |i|
+      facility_hash = Hash[[header, spreadsheet.row(i)].transpose]
+      
+      region = Region.find_or_create_by!(name: facility_hash['region_name'])
+      district = District.create_with(name: facility_hash['district_name']).find_or_create_by!(region_id: region.id)
+      facility_type = FacilityType.find_or_create_by!(name: facility_hash['facility_type_name'])
+
+      facility = Facility.find_or_initialize_by(facility_no: facility_hash["facility_no"])
+      facility.name = facility_hash['name']
+      facility.district_id = district.id
+      facility.facility_type_id = facility_type.id
+      facility.save!
+    end
+  end
+
+  def self.open_spreadsheet(file)
+    case File.extname(file.original_filename)
+    when ".csv" then Roo::CSV.new(file.path, nil, :ignore)
+    when ".xls" then Roo::Excel.new(file.path, nil, :ignore)
+    when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
+    else raise "Unknown file type: #{file.original_filename}"
+    end
+  end
+
+  # def self.import(file)
+  #   CSV.foreach(file.path, headers: true) do |row|
+
+  #     facility_hash = row.to_hash
+
+  #     region = Region.find_or_create_by!(name: facility_hash['region_name'])
+  #     district = District.create_with(name: facility_hash['district_name']).find_or_create_by!(region_id: region.id)
+  #     facility_type = FacilityType.find_or_create_by!(name: facility_hash['facility_type_name'])
+
+  #     facility = Facility.find_or_initialize_by(facility_no: facility_hash["facility_no"])
+  #     facility.name = facility_hash['name']
+  #     facility.district_id = district.id
+  #     facility.facility_type_id = facility_type.id
+  #     facility.save!
+  #   end
+  # end
 
 end

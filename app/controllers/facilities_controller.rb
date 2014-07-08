@@ -4,7 +4,7 @@ class FacilitiesController < ApplicationController
   autocomplete :district, :name
 
   def index
-    @facilities = Facility.paginate(page: params[:page], per_page: 20)
+    @facilities = Facility.paginate(page: params[:page], per_page: 10)
   end
 
 	def show
@@ -76,6 +76,18 @@ class FacilitiesController < ApplicationController
     Facility.find(params[:id]).destroy
     flash[:success] = "Facility deleted successfully"
     redirect_to facilities_path
+  end
+
+  def import
+    #begin
+      Facility.import(params[:file])
+      flash[:success] = "Facilities imported successfully"
+      redirect_to facilities_url
+    #rescue
+      
+      #flash[:error] = "Facilities could not be imported. Invalid CSV file format"
+      #redirect_to facilities_url
+    #end
   end
 
   private

@@ -12,7 +12,13 @@
     </div>
   </div>
 
-  <h2>Facilities</h2>
+  <h3 class="center">Facilities</h3>
+
+  <% if @results.empty? %>
+
+    <h4 class="muted center">No results</h4>
+
+  <% else %>
 
   <div class="table-responsive">
     <table class="table table-striped">
@@ -34,3 +40,5 @@
   </div>
 
   <span class="center"><%= will_paginate @results %></span>
+
+  <% end %>

@@ -20,6 +20,10 @@ gem 'enumerize', '~> 0.8.0'
 gem 'filterrific'
 # Bundle for calendar
 gem 'bootstrap-datepicker-rails'
+# Bundle for importing from excel file
+gem 'roo'
+# Bundle for jasny's extenstion - Twitter extension
+gem 'jasny_bootstrap_extension_rails'
 
 group :development, :test do
 	# Use sqlite3 as the database for Active Record
