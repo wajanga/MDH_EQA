@@ -57,7 +57,7 @@ class FacilitiesController < ApplicationController
         @samples = eqa_test.eqa_samples
         @samples.each { |sample|
           new_sent_sample = SentSample.new
-          new_sent_sample.attributes = sample.attributes
+          new_sent_sample.attributes = sample.attributes.except('id')
           new_sent_sample.facility_id = params[:id]
           new_sent_sample.save
         }

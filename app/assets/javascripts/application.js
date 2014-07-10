@@ -18,7 +18,6 @@
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require jasny-bootstrap
-//= require highcharts
-//= require highcharts/highcharts-more
 //= require turbolinks
+//= require highcharts
 //= require_tree .

@@ -63,7 +63,11 @@ def make_result
   Result.create!(facility_id: 1, eqa_test_id: 1, sample_receive_date: "2014-05-20", 
     done_by: "Aron", assay1_no: "123", assay2_no: "123", 
     approved_by: "Abdallah", test_done_date: "2014-05-20", assay1_expiry_date: "2014-05-20", 
-    assay2_expiry_date: "2014-05-20", result_received_date: "2014-05-20")
+    assay2_expiry_date: "2014-05-20", result_received_date: "2014-05-20", score: 10)
+  Result.create!(facility_id: 2, eqa_test_id: 1, sample_receive_date: "2014-05-20", 
+    done_by: "Aron", assay1_no: "123", assay2_no: "123", 
+    approved_by: "Abdallah", test_done_date: "2014-05-20", assay1_expiry_date: "2014-05-20", 
+    assay2_expiry_date: "2014-05-20", result_received_date: "2014-05-20", score: 10)
 end
 
 def make_eqa
