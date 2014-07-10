@@ -26,7 +26,7 @@
     				<td>Your Final Result</td>
     				<td>Expected Final Result</td>
 				</tr>
-				<% @result.sample_results.each do |sample_result| %>
+				<% @result.sample_results.order(:specimen_id).each do |sample_result| %>
           			<%= render sample_result %>
         		<% end %>
       		</tbody>
