@@ -55,8 +55,14 @@ def make_facility
   #facility_type = FacilityType.create!(name: "Lab")
   Facility.create!(name: "Mwananyamala Regional Hospital", facility_type_id: 1, district_id: district.id,
     facility_no: 123)
+  Facility.create!(name: "Aron Hospital", facility_type_id: 1, district_id: district.id,
+    facility_no: 124)
+  Facility.create!(name: "Samizi Hospital", facility_type_id: 1, district_id: district.id,
+    facility_no: 125)
+  Facility.create!(name: "Muta Hospital", facility_type_id: 1, district_id: district.id,
+    facility_no: 126)
   Facility.create!(name: "Sinza Hospital", facility_type_id: 2, district_id: district.id,
-    facility_no: 321)
+    facility_no: 127)
 end
 
 def make_result
@@ -65,6 +71,18 @@ def make_result
     approved_by: "Abdallah", test_done_date: "2014-05-20", assay1_expiry_date: "2014-05-20", 
     assay2_expiry_date: "2014-05-20", result_received_date: "2014-05-20", score: 10)
   Result.create!(facility_id: 2, eqa_test_id: 1, sample_receive_date: "2014-05-20", 
+    done_by: "Aron", assay1_no: "123", assay2_no: "123", 
+    approved_by: "Abdallah", test_done_date: "2014-05-20", assay1_expiry_date: "2014-05-20", 
+    assay2_expiry_date: "2014-05-20", result_received_date: "2014-05-20", score: 10)
+  Result.create!(facility_id: 3, eqa_test_id: 1, sample_receive_date: "2014-05-20", 
+    done_by: "Aron", assay1_no: "123", assay2_no: "123", 
+    approved_by: "Abdallah", test_done_date: "2014-05-20", assay1_expiry_date: "2014-05-20", 
+    assay2_expiry_date: "2014-05-20", result_received_date: "2014-05-20", score: 10)
+  Result.create!(facility_id: 4, eqa_test_id: 1, sample_receive_date: "2014-05-20", 
+    done_by: "Aron", assay1_no: "123", assay2_no: "123", 
+    approved_by: "Abdallah", test_done_date: "2014-05-20", assay1_expiry_date: "2014-05-20", 
+    assay2_expiry_date: "2014-05-20", result_received_date: "2014-05-20", score: 10)
+  Result.create!(facility_id: 5, eqa_test_id: 1, sample_receive_date: "2014-05-20", 
     done_by: "Aron", assay1_no: "123", assay2_no: "123", 
     approved_by: "Abdallah", test_done_date: "2014-05-20", assay1_expiry_date: "2014-05-20", 
     assay2_expiry_date: "2014-05-20", result_received_date: "2014-05-20", score: 10)
