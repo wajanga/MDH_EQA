@@ -7,7 +7,7 @@ class FacilitiesController < ApplicationController
     #@facilities = Facility.paginate(page: params[:page], per_page: 10)
     @filterrific = Filterrific.new(Facility, params[:filterrific] || session[:filterrific_facilities])
 
-    @facilities = Facility.filterrific_find(@filterrific).page(params[:page])
+    @facilities = Facility.order(:facility_no).filterrific_find(@filterrific).page(params[:page])
 
     session[:filterrific_facilities] = @filterrific.to_hash
 

@@ -37,9 +37,9 @@
 		<% @eqa.eqa_samples.each do |eqa_sample| %>
 		<tr>
 			<td><%= eqa_sample.specimen_id %></td>
-			<td><%= eqa_sample.d_expected_result %></td>
-			<td><%= eqa_sample.u_expected_result %></td>
-			<td><%= eqa_sample.f_expected_result %></td>
+			<td><%= decorate_text(eqa_sample.d_expected_result) %></td>
+			<td><%= decorate_text(eqa_sample.u_expected_result) %></td>
+			<td><%= decorate_text(eqa_sample.f_expected_result) %></td>
 		</tr>
 		<% end %>
 	</tbody>
