@@ -52,6 +52,14 @@ class ResultsController < ApplicationController
 		end
 	end
 
+	def check_eqa
+		if EqaTest.active?
+			return render :json => { :eqa_number => EqaTest.active_eqa_number }, :status => 200
+		else
+			return render :json => { :error => "There is no active EQA" }, :status => 405
+		end
+	end
+
 	private
 
     	def parse_json

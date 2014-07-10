@@ -17,14 +17,20 @@ module DemoPagesHelper
 		if successful_count == 0 && satisfactory_count == 0 && unsatisfactory_count == 0
 			{"No result" => 100}
 		else
-			{"Successful (95-100)" => successful_percent,
-		 	"Satisfactory (90-95)" => satisfactory_percent, 
-		 	"Unsatisfactory (<90)" => unsatisfactory_percent}
+			{"Successful (95-100)" => successful_count,
+		 	"Satisfactory (90-95)" => satisfactory_count, 
+		 	"Unsatisfactory (<90)" => unsatisfactory_count}
 		end
 	end
 
 	def populate_bar_chart
-
+		#{"Dodoma" => 20, "Arusha" => 40, "Kagera" => 30}
+		data = {}
+		Region.find_each do |region|
+			data["#{region.name}"] = 
+				Result.joins(facility: {district: :region}).where(regions: {name: region.name}).count
+		end
+		data.sort_by {|k, v| -v }.first(3)
 	end
 
 end

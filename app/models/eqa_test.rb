@@ -15,4 +15,12 @@ class EqaTest < ActiveRecord::Base
   		order('eqa_number').map { |e| [e.eqa_number, e.id] }
 	end
 
+	def self.active?
+		!find_by("start_date <= :date AND end_date >= :date", date: Date.today).blank?
+	end
+
+	def self.active_eqa_number
+		find_by("start_date <= :date AND end_date >= :date", date: Date.today).eqa_number
+	end
+
 end

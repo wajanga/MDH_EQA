@@ -9,6 +9,7 @@ MDHEqa::Application.routes.draw do
   end
   resources :results do
     collection { post :check_facility }
+    collection { post :check_eqa }
   end
   resources :sent_samples
   resources :eqa_tests
