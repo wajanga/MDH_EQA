@@ -2,6 +2,7 @@ MDHEqa::Application.routes.draw do
   resources :facilities do
     get :autocomplete_district_name, :on => :collection
     collection { post :import }
+    collection { get :reset_filterrific }
     member do
       get :new_sample
     end

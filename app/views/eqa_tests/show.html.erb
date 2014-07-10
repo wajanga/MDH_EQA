@@ -1,0 +1,49 @@
+<% provide(:title, 'EQA Test') %>
+<h1>EQA No: <%= @eqa.eqa_number %></h1>
+
+<div class="row">
+
+<legend>EQA</legend>
+
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>EQA Number</th>
+			<th>Start Date</th>
+			<th>End Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><%= @eqa.eqa_number %></td>
+			<td><%= @eqa.start_date %></td>
+			<td><%= @eqa.end_date %></td>
+		</tr>
+	</tbody>
+</table>
+
+<legend>Samples</legend>
+
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Specimen ID</th>
+			<th>Expected Determine Result</th>
+			<th>Expected Unigold Result</th>
+			<th>Expected Final Result</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @eqa.eqa_samples.each do |eqa_sample| %>
+		<tr>
+			<td><%= eqa_sample.specimen_id %></td>
+			<td><%= eqa_sample.d_expected_result %></td>
+			<td><%= eqa_sample.u_expected_result %></td>
+			<td><%= eqa_sample.f_expected_result %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+
+
+</div>

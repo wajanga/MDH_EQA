@@ -7,6 +7,10 @@ class EqaTestsController < ApplicationController
     @eqas = EqaTest.paginate(page: params[:page])
   end
 
+  def show
+    @eqa = EqaTest.find(params[:id])
+  end
+
   def new
     @eqa_test = EqaTest.new
     3.times { @eqa_test.eqa_samples.build}

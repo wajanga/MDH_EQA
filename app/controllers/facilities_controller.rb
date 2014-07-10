@@ -4,7 +4,17 @@ class FacilitiesController < ApplicationController
   autocomplete :district, :name
 
   def index
-    @facilities = Facility.paginate(page: params[:page], per_page: 10)
+    #@facilities = Facility.paginate(page: params[:page], per_page: 10)
+    @filterrific = Filterrific.new(Facility, params[:filterrific] || session[:filterrific_facilities])
+
+    @facilities = Facility.filterrific_find(@filterrific).page(params[:page])
+
+    session[:filterrific_facilities] = @filterrific.to_hash
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
 	def show
@@ -79,15 +89,21 @@ class FacilitiesController < ApplicationController
   end
 
   def import
-    #begin
+    begin
       Facility.import(params[:file])
       flash[:success] = "Facilities imported successfully"
       redirect_to facilities_url
-    #rescue
-      
-      #flash[:error] = "Facilities could not be imported. Invalid CSV file format"
-      #redirect_to facilities_url
-    #end
+    rescue 
+      flash[:error] = "Facilities could not be imported. Invalid CSV file format"
+      redirect_to facilities_url
+    end
+  end
+
+  def reset_filterrific
+    # Clear session persistence
+    session[:filterrific_facilities] = nil
+    # Redirect back to the index action for default filter settings.
+    redirect_to :action => :index
   end
 
   private

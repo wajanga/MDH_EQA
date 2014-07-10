@@ -1,11 +1,28 @@
 <% provide(:title, 'Facilities') %>
 <h1>Facilities</h1>
 
-<% if @facilities.empty? %>
-<h4 class="muted center">Empty</h4>
-<% else %>
-<div class="table-responsive">
-  <table class="table table-striped">
+<div class="row">
+  <div class="span4" style="margin-left: 0;">
+    <%= form_for @filterrific do |f| %>
+    <%= f.text_field(:search_query, :class => 'filterrific-periodically-observed', :placeholder => 'Search Facility' ) %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div id="facilities">
+
+    <div class="well well-small">
+      <%= page_entries_info @facilities, :model => 'facility' %>
+      <%= render_filterrific_spinner %>
+      <span class="pull-right"><%= link_to "Reset filters", reset_filterrific_facilities_path, :class => 'btn btn-small' %></span>
+    </div>
+
+    <% if @facilities.empty? %>
+    <h4 class="muted center">Empty</h4>
+    <% else %>
+    <div class="table-responsive">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>Facility #</th>
@@ -27,23 +44,25 @@
               <%= link_to "delete", facility, method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: 'btn btn-danger' %>
             </td>
           </tr>
-      <% end %>
+          <% end %>
         </tbody>
-    </table>
-</div>
-<%= will_paginate @facilities %>
-<% end %>
-
-<%= form_tag new_facility_path, method: "get" do %>
-  <%= submit_tag("New Facility", class: "btn btn-primary") %>
-<% end %>
-
-<h4>Import Excel File</h4>
-  <%= form_tag import_facilities_path, multipart: true do %>
-    <div class="fileupload fileupload-new" data-provides="fileupload">
-      <div class="input-append">
-        <div class="uneditable-input span3" style="height:30px;"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><%= file_field_tag :file %></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-      </div>
+      </table>
     </div>
-    <%= submit_tag("Import", class: "btn btn-small") %>
+    <%= will_paginate @facilities %>
+    <% end %>
+  </div>
+
+  <%= form_tag new_facility_path, method: "get" do %>
+  <%= submit_tag("New Facility", class: "btn btn-primary") %>
   <% end %>
+
+  <h4>Import Excel File</h4>
+  <%= form_tag import_facilities_path, multipart: true do %>
+  <div class="fileupload fileupload-new" data-provides="fileupload">
+    <div class="input-append">
+      <div class="uneditable-input span3" style="height:30px;"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><%= file_field_tag :file %></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+    </div>
+  </div>
+  <%= submit_tag("Import", class: "btn btn-small") %>
+  <% end %>
+</div>

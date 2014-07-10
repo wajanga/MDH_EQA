@@ -120,7 +120,8 @@ class Facility < ActiveRecord::Base
       facility_hash = Hash[[header, spreadsheet.row(i)].transpose]
       
       region = Region.find_or_create_by!(name: facility_hash['region_name'])
-      district = District.create_with(name: facility_hash['district_name']).find_or_create_by!(region_id: region.id)
+      #district = District.create_with(name: facility_hash['district_name']).find_or_create_by!(region_id: region.id)
+      district = District.create_with(region_id: region.id).find_or_create_by!(name: facility_hash['district_name'])
       facility_type = FacilityType.find_or_create_by!(name: facility_hash['facility_type_name'])
 
       facility = Facility.find_or_initialize_by(facility_no: facility_hash["facility_no"])
