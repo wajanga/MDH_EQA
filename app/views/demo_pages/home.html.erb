@@ -3,11 +3,11 @@
 
   <div class="row placeholders">
     <div class="span6">
-      <%= pie_chart(populate_pie_chart) %>
+      <%= pie_chart(populate_pie_chart, colors: ["green", "yellow", "red"]) %>
       <h4 class="graph-label">Facility Performance</h4>
     </div>
     <div class="span6">
-      <%= column_chart(populate_bar_chart) %>
+      <%= column_chart(populate_bar_chart, discrete: true) %>
       <h4 class="graph-label">Results received by region</h4>
     </div>
   </div>
