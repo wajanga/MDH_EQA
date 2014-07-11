@@ -17,7 +17,7 @@ module ApplicationHelper
   		elsif (90 <= score && score < 95)
   			"#{score} - Satisfactory"
   		else
-  			"#{score} - Unatisfactory"
+  			"#{score} - Unsatisfactory"
   		end
   	end
 
